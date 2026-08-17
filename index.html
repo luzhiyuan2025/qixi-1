@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>给小郭 · 七夕快乐</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Serif SC', serif;
+            height: 100vh;
+            overflow: hidden;
+            color: #fff;
+        }
+
+        /* ===== 开场打字机遮罩 ===== */
+        #intro-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: rgba(10, 5, 15, 0.92);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+            transition: opacity 1.2s ease, visibility 1.2s ease;
+        }
+
+        #intro-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .typewriter-box {
+            max-width: 520px;
+            text-align: center;
+        }
+
+        #typewriter-text {
+            font-size: clamp(1.1rem, 4vw, 1.5rem);
+            line-height: 2;
+            min-height: 6em;
+            color: #ffd6e8;
+            letter-spacing: 0.05em;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.1em;
+            background: #ff6b9d;
+            margin-left: 2px;
+            vertical-align: text-bottom;
+            animation: blink 0.8s step-end infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .intro-hint {
+            margin-top: 32px;
+            font-size: 0.85rem;
+            color: rgba(255, 200, 220, 0.6);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .intro-hint.show {
+            opacity: 1;
+        }
+
+        /* ===== 主页面 ===== */
+        .banner {
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .banner video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .overlay-gradient {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom,
+                    rgba(0, 0, 0, 0.35) 0%,
+                    rgba(0, 0, 0, 0.15) 40%,
+                    rgba(0, 0, 0, 0.55) 100%);
+            pointer-events: none;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            max-width: 680px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 20px;
+            animation: fadeUp 1s ease 0.3s both;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .qixi-badge {
+            display: inline-block;
+            padding: 6px 18px;
+            border: 1px solid rgba(255, 150, 180, 0.6);
+            border-radius: 999px;
+            font-size: 0.9rem;
+            letter-spacing: 0.2em;
+            color: #ffc8dd;
+            background: rgba(255, 80, 120, 0.15);
+            backdrop-filter: blur(4px);
+            margin-bottom: 16px;
+        }
+
+        .content h1 {
+            margin: 0 0 8px;
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: clamp(2.8rem, 10vw, 4.5rem);
+            font-weight: normal;
+            color: #ff4d8d;
+            text-shadow: 0 2px 20px rgba(255, 77, 141, 0.5);
+            position: relative;
+        }
+
+        .subtitle {
+            font-size: clamp(0.95rem, 3.5vw, 1.15rem);
+            line-height: 2;
+            color: rgba(255, 240, 245, 0.92);
+            margin: 16px 0 28px;
+            text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+        }
+
+        .subtitle p {
+            margin: 0.4em 0;
+        }
+
+        /* 互动按钮 */
+        .btn-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .btn {
+            padding: 10px 22px;
+            border: 1px solid rgba(255, 180, 200, 0.5);
+            border-radius: 999px;
+            background: rgba(255, 60, 100, 0.25);
+            color: #fff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            cursor: pointer;
+            backdrop-filter: blur(6px);
+            transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            background: rgba(255, 60, 100, 0.45);
+            box-shadow: 0 4px 20px rgba(255, 80, 120, 0.4);
+        }
+
+        .btn:active {
+            transform: scale(0.97);
+        }
+
+        .click-tip {
+            font-size: 0.8rem;
+            color: rgba(255, 200, 220, 0.65);
+            margin-top: 8px;
+        }
+
+        /* 弹窗 */
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            z-index: 50;
+            max-width: 320px;
+            padding: 28px 32px;
+            background: rgba(30, 10, 25, 0.88);
+            border: 1px solid rgba(255, 120, 160, 0.4);
+            border-radius: 16px;
+            text-align: center;
+            line-height: 1.8;
+            font-size: 1.05rem;
+            color: #ffd6e8;
+            white-space: pre-line;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.35s, transform 0.35s, visibility 0.35s;
+            pointer-events: none;
+            backdrop-filter: blur(10px);
+        }
+
+        .toast.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+            pointer-events: auto;
+        }
+
+        /* 结尾署名 */
+        .signature {
+            position: fixed;
+            bottom: 24px;
+            left: 0;
+            right: 0;
+            z-index: 2;
+            text-align: center;
+            font-size: 0.85rem;
+            color: rgba(255, 210, 225, 0.75);
+            letter-spacing: 0.08em;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
+            cursor: pointer;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .signature:hover {
+            color: rgba(255, 220, 235, 0.95);
+            transform: scale(1.02);
+        }
+
+        .signature .secret-hint {
+            display: block;
+            margin-top: 6px;
+            font-size: 0.7rem;
+            color: rgba(255, 180, 200, 0.45);
+            letter-spacing: 0.15em;
+        }
+
+        .signature:hover .secret-hint {
+            color: rgba(255, 180, 200, 0.75);
+        }
+
+        .signature .name {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 1.2rem;
+            color: #ff8fab;
+        }
+
+        /* 花瓣 */
+        .petal {
+            position: fixed;
+            pointer-events: none;
+            z-index: 40;
+            font-size: 18px;
+            animation: petalFall linear forwards;
+            user-select: none;
+        }
+
+        @keyframes petalFall {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) rotate(0deg) scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(var(--drift-x), 120vh) rotate(var(--rotate)) scale(0.6);
+            }
+        }
+
+        /* 音乐播放提示 */
+        .music-status {
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            z-index: 30;
+            font-size: 0.75rem;
+            color: rgba(255, 200, 220, 0.7);
+            padding: 6px 12px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 999px;
+            backdrop-filter: blur(4px);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 开场打字机 -->
+    <div id="intro-overlay">
+        <div class="typewriter-box">
+            <div id="typewriter-text"></div>
+        </div>
+        <p class="intro-hint" id="intro-hint">点击任意处，进入惊喜 ✨</p>
+    </div>
+
+    <!-- 主内容 -->
+    <div class="banner" id="main-banner">
+        <video autoplay muted loop playsinline>
+            <source src="粒子玫瑰.mp4" type="video/mp4">
+        </video>
+        <div class="overlay-gradient"></div>
+
+        <div class="content">
+            <div class="qixi-badge">七夕快乐</div>
+            <h1>致小郭</h1>
+            <div class="subtitle">
+                <p>我们刚在一起，但我好像已经喜欢你好久了。</p>
+                <p>粒子会散，玫瑰会谢，</p>
+                <p>我想陪你，把每一个普通日子都过成七夕。</p>
+            </div>
+
+            <div class="btn-row">
+                <button class="btn" id="btn-music">🎵 播放音乐</button>
+                <button class="btn" id="btn-miss">💕 我也想你</button>
+                <button class="btn" id="btn-letter">💌 打开情书</button>
+            </div>
+            <p class="click-tip">点击屏幕任意位置，撒落玫瑰花瓣 🌸</p>
+        </div>
+    </div>
+
+    <!-- 弹窗 -->
+    <div class="toast" id="toast"></div>
+
+    <!-- 音乐状态 -->
+    <div class="music-status" id="music-status">音乐未播放</div>
+
+    <!-- 署名（点击有悄悄话） -->
+    <div class="signature" id="signature">
+        <span class="name">爱你的 · sjw</span><br>
+        2026.08.19 · 七夕
+        <span class="secret-hint">✦ 点我有悄悄话 ✦</span>
+    </div>
+
+    <audio id="music1" loop preload="auto">
+        <!-- 部署时建议把 mp3 放在同目录，改成 src="music.mp3" -->
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        /* ========== 打字机开场 ========== */
+        const introLines = [
+            '小郭———',
+            '有一份小礼物，想在这个七夕送给你。',
+            '一束粒子玫瑰~~，',
+            '点击屏幕，让音乐和花瓣一起盛开吧！'
+        ];
+
+        const typewriterEl = document.getElementById('typewriter-text');
+        const introOverlay = document.getElementById('intro-overlay');
+        const introHint = document.getElementById('intro-hint');
+        let lineIndex = 0;
+        let charIndex = 0;
+        let introDone = false;
+
+        function typeNextChar() {
+            if (lineIndex >= introLines.length) {
+                introDone = true;
+                introHint.classList.add('show');
+                return;
+            }
+            const line = introLines[lineIndex];
+            if (charIndex < line.length) {
+                typewriterEl.innerHTML = introLines.slice(0, lineIndex).join('<br>') +
+                    (lineIndex > 0 ? '<br>' : '') +
+                    line.substring(0, charIndex + 1) +
+                    '<span class="cursor"></span>';
+                charIndex++;
+                setTimeout(typeNextChar, 80 + Math.random() * 40);
+            } else {
+                lineIndex++;
+                charIndex = 0;
+                setTimeout(typeNextChar, 600);
+            }
+        }
+
+        typeNextChar();
+
+        function dismissIntro() {
+            if (!introDone) return;
+            introOverlay.classList.add('hidden');
+        }
+
+        introOverlay.addEventListener('click', dismissIntro);
+
+        /* ========== 音乐 ========== */
+        const audio = document.getElementById('music1');
+        const musicStatus = document.getElementById('music-status');
+        let musicPlaying = false;
+
+        function playMusic() {
+            audio.play().then(() => {
+                musicPlaying = true;
+                musicStatus.textContent = '♪ 正在播放--One Last Kiss~';
+            }).catch(() => {
+                musicStatus.textContent = '请点击按钮播放音乐（我很喜欢这首歌！）';
+            });
+        }
+
+        document.getElementById('btn-music').addEventListener('click', (e) => {
+            e.stopPropagation();
+            playMusic();
+        });
+
+        /* ========== 互动按钮 ========== */
+        const toast = document.getElementById('toast');
+        let toastTimer;
+
+        function showToast(text, duration = 3500) {
+            clearTimeout(toastTimer);
+            toast.textContent = text;
+            toast.classList.add('show');
+            toastTimer = setTimeout(() => toast.classList.remove('show'), duration);
+        }
+
+        document.getElementById('btn-miss').addEventListener('click', (e) => {
+            e.stopPropagation();
+            const messages = [
+                '“七”待是你，“夕”望是你。欢喜是你，喜欢是你',
+                '没别的意思，就是借着特殊日子说声喜欢你',
+                '想陪你烹雪煮茶，白首天涯，万家灯火，月落归家',
+                '七夕快乐，我的宝贝~'
+            ];
+            showToast(messages[Math.floor(Math.random() * messages.length)]);
+        });
+
+        document.getElementById('btn-letter').addEventListener('click', (e) => {
+            e.stopPropagation();
+            showToast(
+                '小郭，七夕快乐！\n' +
+                '这是我们一起过的第一个七夕，希望以后的每一个七夕都有我陪你❤\n' +
+                '愿我们岁岁年年，都爱意满满。💗',
+                6000
+            );
+        });
+
+        toast.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toast.classList.remove('show');
+        });
+
+        document.getElementById('signature').addEventListener('click', (e) => {
+            e.stopPropagation();
+            showToast(
+                '🤫 坦白告诉你——\n' +
+                '这是我第一次做这种网页（虽然全是ai做的哈哈哈哈）\n' +
+                '可能有点笨拙，有些ai写的话还是挺蠢的，但我觉得蛮有意思的就没改。不要介意这些土味情话哈哈哈\n' +
+                '下次我会做得更漂亮、更厉害（如果不忙的话），\n' +
+                '但喜欢你的心，只会比现在更多。💕',
+                8000
+            );
+        });
+
+        /* ========== 点击撒花瓣 ========== */
+        const petalChars = ['🌸', '🌹', '💮', '🏵️', '✿', '❀'];
+
+        function spawnPetals(x, y, count = 8) {
+            for (let i = 0; i < count; i++) {
+                const petal = document.createElement('div');
+                petal.className = 'petal';
+                petal.textContent = petalChars[Math.floor(Math.random() * petalChars.length)];
+                petal.style.left = (x + (Math.random() - 0.5) * 60) + 'px';
+                petal.style.top = y + 'px';
+                petal.style.setProperty('--drift-x', (Math.random() - 0.5) * 200 + 'px');
+                petal.style.setProperty('--rotate', (Math.random() * 720 - 360) + 'deg');
+                const duration = 2.5 + Math.random() * 2;
+                petal.style.animationDuration = duration + 's';
+                petal.style.fontSize = (14 + Math.random() * 14) + 'px';
+                document.body.appendChild(petal);
+                setTimeout(() => petal.remove(), duration * 1000);
+            }
+        }
+
+        document.getElementById('main-banner').addEventListener('click', (e) => {
+            if (e.target.closest('.btn') || e.target.closest('.toast')) return;
+            spawnPetals(e.clientX, e.clientY);
+            if (!musicPlaying) playMusic();
+        });
+    </script>
+</body>
+
+</html>
