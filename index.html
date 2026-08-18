@@ -30,7 +30,7 @@
             z-index: -2;
             opacity:0.32;
         }
-        /* 全局飘落花瓣 */
+        /*全局飘落花瓣*/
         .petal {
             position: fixed;
             background: linear-gradient(135deg,#ffc0cb,#ff8fb3);
@@ -39,8 +39,8 @@
             pointer-events: none;
             filter: blur(0.3px);
         }
-        /* 点击触发鲜花礼花 */
-        .click‑flower{
+        /*点击绽放花朵*/
+        .click_flower{
             position:fixed;
             pointer-events:none;
             z-index:200;
@@ -68,8 +68,8 @@
             0%,49%{opacity:1}
             50%,100%{opacity:0}
         }
-        /* 音乐触发提示按钮 */
-        .music‑tip{
+        /*音乐按钮*/
+        .music_tip{
             position:absolute;
             top:26px;
             left:50%;
@@ -85,16 +85,16 @@
             transition:0.4s;
             box-shadow:0 0 12px #ff8fb322;
         }
-        .music‑tip:hover{
+        .music_tip:hover{
             background:rgba(255,143,179,0.22);
             box-shadow:0 0 18px #ff8fb360;
         }
-        .music‑tip.played{
+        .music_tip.played{
             opacity:0;
             pointer-events:none;
         }
-        /* 底部主交互按钮组 */
-        .love‑buttons{
+        /*底部按钮组*/
+        .love_buttons{
             position:absolute;
             bottom:130px;
             left:50%;
@@ -103,24 +103,24 @@
             gap:20px;
             z-index:100;
         }
-        .love‑btn{
+        .love_btn{
             padding:11px 26px;
             border:1px solid #ff8fb3;
             background:rgba(255,143,179,0.09);
             color:#ffd8e4;
             border-radius:34px;
             cursor:pointer;
-            transition:all 0.35s cubic‑bezier(0.215, 0.61, 0.355, 1);
+            transition:all 0.35s cubic-bezier(0.215, 0.61, 0.355, 1);
             font-size:15px;
             letter-spacing:1.3px;
         }
-        .love‑btn:hover{
+        .love_btn:hover{
             background:rgba(255,143,179,0.3);
             box-shadow:0 0 22px #ff8fb377;
             transform:scale(1.08);
         }
-        /* 弹窗模态层 */
-        .modal‑wrap{
+        /*弹窗*/
+        .modal_wrap{
             position:fixed;
             top:0;left:0;
             width:100%;height:100%;
@@ -153,7 +153,7 @@
             color:#fceef4;
             text-align:center;
         }
-        .btn‑group{
+        .btn_group{
             margin-top:30px;
             display:flex;
             gap:16px;
@@ -173,7 +173,7 @@
             background:#ff6b9c38;
             box-shadow:0 0 12px #ff8fb344;
         }
-        /* 右下角签名 */
+        /*右下角签名*/
         #sign{
             position:absolute;
             bottom:42px;
@@ -182,11 +182,10 @@
             color:#ffd0e0;
             text-shadow:0 0 12px #ff8fb3;
             opacity:0;
-            transition:opacity 1.8s ease‑in‑out;
+            transition:opacity 1.8s ease-in-out;
             letter-spacing:1.4px;
         }
-        /* 小提示文字 */
-        .hint‑tip{
+        .hint_tip{
             position:absolute;
             bottom:82px;
             left:50%;
@@ -202,14 +201,13 @@
         <source src="./粒子玫瑰.mp4" type="video/mp4">
     </video>
 
-    <!--音乐播放提示按钮-->
-    <div class="music‑tip" id="musicBtn">🎵点击开启背景音乐</div>
+    <div class="music_tip" id="musicBtn">🎵点击开启背景音乐</div>
 
     <div id="typeBox"></div>
     <span class="cursor"> </span>
 
-    <!--弹窗模块1-->
-    <div class="modal‑wrap" id="pop1">
+    <!--弹窗1-->
+    <div class="modal_wrap" id="pop1">
         <div class="modal">
             <h3>「 予我星辰 · 万般偏爱 」</h3>
             <p>
@@ -223,14 +221,14 @@
             一生一世，一双人<br>
             万般风月，皆不及你
             </p>
-            <div class="btn‑group">
+            <div class="btn_group">
                 <button onclick="closePop('pop1')">珍藏温柔</button>
             </div>
         </div>
     </div>
 
-    <!--弹窗模块2-->
-    <div class="modal‑wrap" id="pop2">
+    <!--弹窗2-->
+    <div class="modal_wrap" id="pop2">
         <div class="modal">
             <h3>「 岁月为证 · 爱意绵长 」</h3>
             <p>
@@ -243,14 +241,14 @@
             距离可以阻隔相见的躯体<br>
             永远阻拦不了我奔向你的心意
             </p>
-            <div class="btn‑group">
+            <div class="btn_group">
                 <button onclick="closePop('pop2')">岁岁相守</button>
             </div>
         </div>
     </div>
 
-    <!--弹窗模块3-->
-    <div class="modal‑wrap" id="pop3">
+    <!--弹窗3-->
+    <div class="modal_wrap" id="pop3">
         <div class="modal">
             <h3>「 此生笃定 · 唯你一人 」</h3>
             <p>
@@ -263,20 +261,20 @@
             我全部的温柔、偏爱与坚定<br>
             尽数赠予我的小星星
             </p>
-            <div class="btn‑group">
+            <div class="btn_group">
                 <button onclick="closePop('pop3')">此生不负</button>
             </div>
         </div>
     </div>
 
     <!--底部交互按钮-->
-    <div class="love‑buttons">
-        <div class="love‑btn" onclick="openPop('pop1')">万般偏爱</div>
-        <div class="love‑btn" onclick="openPop('pop2')">我们的故事</div>
-        <div class="love‑btn" onclick="openPop('pop3')">一生一世</div>
+    <div class="love_buttons">
+        <div class="love_btn" onclick="openPop('pop1')">万般偏爱</div>
+        <div class="love_btn" onclick="openPop('pop2')">我们的故事</div>
+        <div class="love_btn" onclick="openPop('pop3')">一生一世</div>
     </div>
 
-    <div class="hint‑tip">💡点击页面任意位置会绽放小花花</div>
+    <div class="hint_tip">💡点击页面任意位置会绽放小花花</div>
     <div id="sign">——始于2026.08.06 · 致我的专属小星星</div>
 
     <audio id="bgMusic" loop>
@@ -284,7 +282,6 @@
     
 
 <script>
-//打字机文案
 const introLines = [
 '致我最珍贵的小星星：',
 '',
@@ -322,7 +319,7 @@ let lineIndex = 0;
 let charIndex = 0;
 const speed = 60;
 
-//打字机函数
+//打字机
 function typeWrite(){
     if(lineIndex >= introLines.length){
         cursorEl.style.display = 'none';
@@ -344,7 +341,7 @@ function typeWrite(){
     }
 }
 
-//全局持续飘落花瓣
+//全局花瓣飘落
 function createPetal(){
     const p = document.createElement('div');
     p.className = 'petal';
@@ -354,21 +351,21 @@ function createPetal(){
     p.style.left = Math.random()*100 +'%';
     p.style.top = '-18px';
     const dur = Math.random()*7.5 +5.5;
-    p.style.transition = `top ${dur}s linear, left ${dur}s ease‑in‑out`;
+    p.style.transition = `top ${dur}s linear, left ${dur}s ease-in-out`;
     document.body.appendChild(p);
     setTimeout(()=>{
         p.style.top = '105vh';
-        p.style.left = (parseFloat(p.style.left)+(Math.random()*14‑7))+'%';
+        p.style.left = (parseFloat(p.style.left)+(Math.random()*14-7))+'%';
     },20);
     setTimeout(()=>{p.remove();},dur*1000);
 }
 setInterval(createPetal,400);
 
-//点击页面绽放鲜花礼花
+//点击页面绽放花朵
 document.body.addEventListener('click',function(e){
     for(let i=0;i<14;i++){
         const flower = document.createElement('div');
-        flower.className = 'click‑flower';
+        flower.className = 'click_flower';
         const angle = (Math.PI*2/14)*i;
         const r = 60 + Math.random()*80;
         const x = e.clientX + Math.cos(angle)*r;
@@ -377,7 +374,7 @@ document.body.addEventListener('click',function(e){
         flower.style.top = y+'px';
         flower.style.fontSize = (12+Math.random()*12)+'px';
         flower.innerText = ['🌸','💮','🌷','💐','🌹'][Math.floor(Math.random()*5)];
-        flower.style.transition = 'all 0.9s ease‑out';
+        flower.style.transition = 'all 0.9s ease-out';
         document.body.appendChild(flower);
         setTimeout(()=>{
             flower.style.opacity = '0';
@@ -387,7 +384,7 @@ document.body.addEventListener('click',function(e){
     }
 });
 
-//音乐按钮控制（保留原点击播放逻辑）
+//音乐按钮
 musicBtn.addEventListener('click',()=>{
     bgMusic.play().catch(err=>{});
     musicBtn.classList.add('played');
