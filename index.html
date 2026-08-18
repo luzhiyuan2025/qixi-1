@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>One life,one love</title>
-    <style>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">One life, One love · 予我的小星星<style>
         * {
             margin: 0;
             padding: 0;
@@ -38,15 +33,16 @@
         }
         #typeBox{
             position:absolute;
-            top:50%;
+            top:42%;
             left:50%;
             transform:translate(-50%,-50%);
-            max-width:620px;
-            width:90%;
+            max-width:680px;
+            width:92%;
             font-size:22px;
-            line-height:2;
+            line-height:2.2;
             text-shadow: 0 0 12px #ffc0cb;
             white-space:pre-wrap;
+            letter-spacing:1px;
         }
         .cursor{
             display:inline-block;
@@ -58,36 +54,65 @@
             0%,49%{opacity:1}
             50%,100%{opacity:0}
         }
+        /* 新增底部三大浪漫按钮 */
+        .love-buttons{
+            position:absolute;
+            bottom:120px;
+            left:50%;
+            transform:translateX(-50%);
+            display:flex;
+            gap:18px;
+            z-index:100;
+        }
+        .love-btn{
+            padding:10px 24px;
+            border:1px solid #ff8fb3;
+            background:rgba(255,143,179,0.1);
+            color:#ffd8e4;
+            border-radius:30px;
+            cursor:pointer;
+            transition:all 0.3s ease;
+            font-size:15px;
+            letter-spacing:1px;
+        }
+        .love-btn:hover{
+            background:rgba(255,143,179,0.3);
+            box-shadow:0 0 15px #ff8fb3;
+            transform:scale(1.05);
+        }
         .modal-wrap{
             position:fixed;
             top:0;left:0;
             width:100%;height:100%;
-            background:rgba(0,0,0,0.65);
+            background:rgba(0,0,0,0.75);
             display:none;
             align-items:center;
             justify-content:center;
             z-index:200;
         }
         .modal{
-            background:#14142b;
+            background:#101028;
             border:1px solid #ff8fb3;
-            padding:32px;
-            max-width:540px;
-            width:88%;
-            border-radius:14px;
-            box-shadow: 0 0 30px #ff6b9c60;
+            padding:36px;
+            max-width:580px;
+            width:90%;
+            border-radius:16px;
+            box-shadow: 0 0 40px #ff6b9c40;
         }
         .modal h3{
-            color:#ffc8da;
-            margin-bottom:16px;
+            color:#ffd0e0;
+            margin-bottom:20px;
+            font-size:20px;
+            letter-spacing:2px;
         }
         .modal p{
-            line-height:1.8;
+            line-height:2;
             font-size:16px;
-            color:#f8e8ef;
+            color:#fceef4;
+            text-align:center;
         }
         .btn-group{
-            margin-top:24px;
+            margin-top:28px;
             display:flex;
             gap:14px;
             justify-content:center;
@@ -107,105 +132,116 @@
         #sign{
             position:absolute;
             bottom:40px;
-            right:45px;
-            font-size:17px;
-            color:#ffc8da;
-            text-shadow:0 0 8px #ff8fb3;
+            right:50px;
+            font-size:18px;
+            color:#ffd0e0;
+            text-shadow:0 0 10px #ff8fb3;
             opacity:0;
+            transition:opacity 1.5s;
+            letter-spacing:1px;
         }
-    </style>
-</head>
+    </head>
 <body>
     <video id="videoBg" loop muted autoplay>
-        <source src="./粒子玫瑰.mp4" type="video/mp4">
-    </video>
+<source src="./粒子玫瑰.mp4" type="video/mp4">
+</video>
 
-    <div id="typeBox"></div>
-    <span class="cursor"> </span>
-
-    <div class="modal-wrap" id="m1">
-        <div class="modal">
-            <h3>关于我们</h3>
-            <p>跨越山海的距离，我们在八月六日，正式属于彼此。<br>这是我们一同度过的第一个七夕。<br>纵然相隔两地，思念却从未被距离冲淡。每一通电话，每一句碎碎念，都是独属于我们的浪漫。</p>
+   <div id="typeBox"></div>
+    <span class="cursor"> <!-- 新增三大点击浪漫弹窗 --><div class="modal-wrap" id="pop<div class="modal">
+           <h3>「 予我星辰 · 万般</h3<p>
+            人海万千，<br>
+            我看过世间无数风景<br>
+            却唯独对你一见倾心<br><br>
+            始于二零二六年八月六<br>
+            山河错落，你是人间<br>
+            异地隔山海，爱意无<br>
+            One life, one love<br>
+            一生<br>
+            万般风月，皆不及你
             <div class="btn-group">
-                <button onclick="closeModal('m1')">记下这份温柔</button>
-            </div>
+<button onclick="closePop('pop1')"></button>
+</div>
         </div>
-    </div>
+    <div class="modal-wrap" id="pop2">
+       <div class="modal"><h3>「 岁月为证 · 爱意绵长 」</h3>
+            <p>
+            这是我们相伴的第一个七夕<br>
+            没有<br>
+            却有跨越<br>
+            我接纳你所有不安与小情绪<br>
+            包容<br>
+            你的出现，是我今年最好的<br>
+            距离只能阻拦相见<br>
+            永远阻拦不了我奔向你的心意</p>
+<div class="btn<button onclick="closePop('pop2')">岁岁相守</div</div></div>
 
-    <div class="modal-wrap" id="m2">
-        <div class="modal">
-            <h3>心底告白</h3>
-            <p>One life,one love。<br>人的一生，只为一份挚爱奔赴。<br>我会接住你的不安，包容你的小情绪，把满心的偏爱慢慢交付给你。<br>往后朝朝暮暮，期待和你把所有期待慢慢变成现实。</p>
-            <div class="btn-group">
-                <button onclick="closeModal('m2')">藏进心里</button>
-            </div>
-        </div>
-    </div>
+<div class="modal-wrap" id="pop3<div class="modal">
+            <h3>「 此生笃定 · 唯你一人</h3><p>
+            风起念你，<br>
+            朝朝暮暮，心心念念皆是你<br>
+            我不求轰轰烈烈的轰动<br>
+            只求细水长流的陪伴<br>
+            往后余生，春去秋来<br>
+            三餐四季，朝夕余年<br><br>
+            我所有的温柔、偏爱、<br>
+            全部专属予我的小星星
+</p>
+           <div class="btn-group<button onclick="closePop('pop3</button</div></div>
+</div>
 
-    <div class="modal-wrap" id="m3">
-        <div class="modal">
-            <h3>期许</h3>
-            <p>星星可以跨越夜空相见，我们也终会跨过异地相逢。<br>愿我们岁岁相伴，爱意长久，把每一个平凡日子都酿成温柔。</p>
-            <div class="btn-group">
-                <button onclick="closeModal('m3')">满怀期待</button>
-            </div>
-        </div>
-    </div>
+   <!-- 底部新增三个高级浪漫按钮 -->
+    <div class="love-butt<div class="love-btn" onclick="openPop('pop1</div<div class="love-btn" onclick="openPop('pop2')</div<div class="love-btn" onclick="openPop('pop3')</div></div>
 
-    <div id="sign">——予我的女孩</div>
+<div id="sign">——始于2026.08.06 · 致我的专属</div>
 
-    <audio id="bgMusic" loop>
+   <audio id="bgMusic" loop>
         <source src="./music.mp3">
-    
-
-<script>
-// ======================仅这里修改文案，符号不要改动======================
+    <script>
+// 全新升级 高级宏大浪漫打字机文案
 const introLines = [
-'我亲爱的女孩——',
-'有一份藏了很久的心意，想在我们的第一个七夕讲给你听。',
+'致我最珍贵的小星星：',
 '',
-'八月六日，是我们故事新的起点。',
-'隔着遥远的两地，我们确认了彼此。',
+'世间情话千万，皆不及我对你的万般真心。',
+'人海浮沉，山河辽阔，',
+'何其有幸，让我在最好的时光里遇见你。',
 '',
-'很多心里话，电话里会被噪音吞没，紧张时又会堵在喉咙。',
-'所以把思念写在这里，慢慢说给你。',
+'二零二六年八月六日，',
+'是我们故事落笔的开篇，',
+'是我心动定格的永远。',
 '',
-'One life,one love。',
-'一生，唯爱一人。',
+'我们隔山海、跨城市，',
+'异地是考验，更是我们独有的浪漫。',
 '',
-'异地会拉开空间的距离，却拉不开心里的牵挂。',
-'你的欢喜、你的敏感、你的小脾气，我全都好好收好。',
+'有人说，爱意会被距离冲淡，',
+'但我偏要反其道而行，',
+'越隔千里，越思念入骨，越笃定余生是你。',
 '',
-'点击下方，开启三段心里话。',
-'【1】关于我们',
-'【2】心底告白',
-'【3】期许',
+'One life, one love.',
+'一生一世一双人，半醒半醉半余生。',
 '',
-'等待花瓣缓缓落下。'
+'我想把人间所有温柔、星光、晚风、浪漫，',
+'全部赠予独一无二的你。',
+'',
+'点击下方，开启属于我们的专属浪漫。'
 ];
-// ======================================================================
 
 const typeBox = document.getElementById('typeBox');
 const cursorEl = document.querySelector('.cursor');
 const signEl = document.getElementById('sign');
 let lineIndex = 0;
 let charIndex = 0;
-const speed = 65;
+const speed = 60;
 
 function typeWrite(){
     if(lineIndex >= introLines.length){
         cursorEl.style.display = 'none';
         setTimeout(()=>{
-            document.getElementById('m1').style.display='flex';
-        },1200);
-        setTimeout(()=>{
             signEl.style.opacity = 1;
-        },2200);
+        },800);
         return;
     }
     const currLine = introLines[lineIndex];
-    if(charIndex < currLine.length){
+< currLine.length){
         typeBox.innerText = currLine.substring(0,charIndex);
         charIndex++;
         setTimeout(typeWrite,speed);
@@ -213,11 +249,11 @@ function typeWrite(){
         typeBox.innerText += '\n';
         lineIndex++;
         charIndex = 0;
-        setTimeout(typeWrite, 280);
+        setTimeout(typeWrite, 300);
     }
 }
 
-//花瓣飘落
+// 原版花瓣特效完全保留
 function createPetal(){
     const p = document.createElement('div');
     p.className = 'petal';
@@ -237,13 +273,15 @@ function createPetal(){
 }
 setInterval(createPetal,420);
 
-function closeModal(id){
+// 弹窗开关函数
+function openPop(id){
+    document.getElementById(id).style.display='flex';
+}
+function closePop(id){
     document.getElementById(id).style.display='none';
-    if(id==='m1') setTimeout(()=>{document.getElementById('m2').style.display='flex'},600);
-    else if(id==='m2') setTimeout(()=>{document.getElementById('m3').style.display='flex'},600);
 }
 
-//音乐交互
+// 背景音乐点击激活
 document.body.addEventListener('click',()=>{
     const aud = document.getElementById('bgMusic');
     aud.play().catch(e=>{});
@@ -253,5 +291,5 @@ window.onload = ()=>{
     typeWrite();
 }
 </script>
-</body>
 </html>
+
