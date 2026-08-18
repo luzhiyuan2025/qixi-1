@@ -1,5 +1,10 @@
-<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">One life, One love · 予我的小星星<style>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One life, One love · 予我的小星星</title>
+    <style>
         * {
             margin: 0;
             padding: 0;
@@ -54,7 +59,6 @@
             0%,49%{opacity:1}
             50%,100%{opacity:0}
         }
-        /* 新增底部三大浪漫按钮 */
         .love-buttons{
             position:absolute;
             bottom:120px;
@@ -140,64 +144,87 @@
             transition:opacity 1.5s;
             letter-spacing:1px;
         }
-    </head>
+    </style>
+</head>
 <body>
     <video id="videoBg" loop muted autoplay>
-<source src="./粒子玫瑰.mp4" type="video/mp4">
-</video>
+        <source src="./粒子玫瑰.mp4" type="video/mp4">
+    </video>
 
-   <div id="typeBox"></div>
-    <span class="cursor"> <!-- 新增三大点击浪漫弹窗 --><div class="modal-wrap" id="pop<div class="modal">
-           <h3>「 予我星辰 · 万般</h3<p>
-            人海万千，<br>
+    <div id="typeBox"></div>
+    <span class="cursor"> </span>
+
+    <div class="modal-wrap" id="pop1">
+        <div class="modal">
+            <h3>「 予我星辰 · 万般偏爱 」</h3>
+            <p>
+            人海万千，烟火琳琅<br>
             我看过世间无数风景<br>
             却唯独对你一见倾心<br><br>
-            始于二零二六年八月六<br>
-            山河错落，你是人间<br>
-            异地隔山海，爱意无<br>
+            始于二零二六年八月六日<br>
+            山河错落，你是人间星光<br>
+            异地隔山海，爱意无距离<br><br>
             One life, one love<br>
-            一生<br>
+            一生一世，一双人<br>
             万般风月，皆不及你
+            </p>
             <div class="btn-group">
-<button onclick="closePop('pop1')"></button>
-</div>
+                <button onclick="closePop('pop1')">珍藏温柔</button>
+            </div>
         </div>
+    </div>
+
     <div class="modal-wrap" id="pop2">
-       <div class="modal"><h3>「 岁月为证 · 爱意绵长 」</h3>
+        <div class="modal">
+            <h3>「 岁月为证 · 爱意绵长 」</h3>
             <p>
             这是我们相伴的第一个七夕<br>
-            没有<br>
-            却有跨越<br>
+            没有朝夕相伴的朝夕<br>
+            却有跨越山河的真心<br><br>
             我接纳你所有不安与小情绪<br>
-            包容<br>
-            你的出现，是我今年最好的<br>
+            包容你所有温柔与可爱<br>
+            你的出现，是我今年最好的幸运<br><br>
             距离只能阻拦相见<br>
-            永远阻拦不了我奔向你的心意</p>
-<div class="btn<button onclick="closePop('pop2')">岁岁相守</div</div></div>
+            永远阻拦不了我奔向你的心意
+            </p>
+            <div class="btn-group">
+                <button onclick="closePop('pop2')">岁岁相守</button>
+            </div>
+        </div>
+    </div>
 
-<div class="modal-wrap" id="pop3<div class="modal">
-            <h3>「 此生笃定 · 唯你一人</h3><p>
-            风起念你，<br>
-            朝朝暮暮，心心念念皆是你<br>
+    <div class="modal-wrap" id="pop3">
+        <div class="modal">
+            <h3>「 此生笃定 · 唯你一人 」</h3>
+            <p>
+            风起念你，星落思你<br>
+            朝朝暮暮，心心念念皆是你<br><br>
             我不求轰轰烈烈的轰动<br>
             只求细水长流的陪伴<br>
             往后余生，春去秋来<br>
             三餐四季，朝夕余年<br><br>
-            我所有的温柔、偏爱、<br>
+            我所有的温柔、偏爱、坚定<br>
             全部专属予我的小星星
-</p>
-           <div class="btn-group<button onclick="closePop('pop3</button</div></div>
-</div>
+            </p>
+            <div class="btn-group">
+                <button onclick="closePop('pop3')">此生不负</button>
+            </div>
+        </div>
+    </div>
 
-   <!-- 底部新增三个高级浪漫按钮 -->
-    <div class="love-butt<div class="love-btn" onclick="openPop('pop1</div<div class="love-btn" onclick="openPop('pop2')</div<div class="love-btn" onclick="openPop('pop3')</div></div>
+    <div class="love-buttons">
+        <div class="love-btn" onclick="openPop('pop1')">万般偏爱</div>
+        <div class="love-btn" onclick="openPop('pop2')">我们的故事</div>
+        <div class="love-btn" onclick="openPop('pop3')">一生一世</div>
+    </div>
 
-<div id="sign">——始于2026.08.06 · 致我的专属</div>
+    <div id="sign">——始于2026.08.06 · 致我的专属小星星</div>
 
-   <audio id="bgMusic" loop>
+    <audio id="bgMusic" loop>
         <source src="./music.mp3">
-    <script>
-// 全新升级 高级宏大浪漫打字机文案
+    
+
+<script>
 const introLines = [
 '致我最珍贵的小星星：',
 '',
@@ -241,7 +268,7 @@ function typeWrite(){
         return;
     }
     const currLine = introLines[lineIndex];
-< currLine.length){
+    if(charIndex < currLine.length){
         typeBox.innerText = currLine.substring(0,charIndex);
         charIndex++;
         setTimeout(typeWrite,speed);
@@ -253,7 +280,6 @@ function typeWrite(){
     }
 }
 
-// 原版花瓣特效完全保留
 function createPetal(){
     const p = document.createElement('div');
     p.className = 'petal';
@@ -273,7 +299,6 @@ function createPetal(){
 }
 setInterval(createPetal,420);
 
-// 弹窗开关函数
 function openPop(id){
     document.getElementById(id).style.display='flex';
 }
@@ -281,7 +306,6 @@ function closePop(id){
     document.getElementById(id).style.display='none';
 }
 
-// 背景音乐点击激活
 document.body.addEventListener('click',()=>{
     const aud = document.getElementById('bgMusic');
     aud.play().catch(e=>{});
@@ -291,5 +315,5 @@ window.onload = ()=>{
     typeWrite();
 }
 </script>
+</body>
 </html>
-
